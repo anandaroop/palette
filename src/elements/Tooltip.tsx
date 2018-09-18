@@ -1,11 +1,13 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import { BorderBox } from "./BorderBox"
 import { Sans } from "./Typography"
 
 const Wrapper = styled.div`
   position: relative;
+  display: inline-block;
+  outline: solid 1px red;
 
   &:hover {
     .tooltip-content {
@@ -19,15 +21,40 @@ const Wrapper = styled.div`
   }
 `
 
+const placements = {
+  top: css`
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, -5px);
+  `,
+  right: css`
+    top: 50%;
+    left: 100%;
+    transform: translate(5px, -50%);
+  `,
+  bottom: css`
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 5px);
+  `,
+  left: css`
+    top: 50%;
+    right: 100%;
+    transform: translate(-5px, -50%);
+  `,
+}
+
 const Tip = styled(BorderBox)`
-  bottom: 100%;
+  ${placements.left};
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 5px;
-  opacity: 0;
-  position: absolute;
-  transition: opacity 250ms ease-out;
   max-width: 230px;
+  opacity: 1;
+  position: absolute;
   text-align: left;
+  transition: opacity 250ms ease-out;
+  width: 20em;
+  z-index: 10000;
 `
 
 export interface TooltipProps {
